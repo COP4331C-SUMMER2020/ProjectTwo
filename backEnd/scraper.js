@@ -6,9 +6,14 @@ var recipeNames = [];
 var recipeIngredients = [];
 var recipeProcedures = [];
 var badIndeces = [563];
-badIndeces.fill(0)
+badIndeces.fill(0);
 var index = 0;
 recipeNamerIDKwhoKnows();
+// we create 'users' collection in newdb database
+var url = "mongodb+srv://group24:elevenbrethren@group24-ityll.mongodb.net/group24?retryWrites=true&w=majority";
+ 
+// create a client to mongodb
+var MongoClient = require('mongodb').MongoClient;
 
 
 //function will go through each recipe on main page, send each recipe name to recipeScraper to open
@@ -23,12 +28,17 @@ async function recipeNamerIDKwhoKnows()
 	
 	for (let name of recipes)
 	{
+		if (index <438)
+		{
+			index++;
+			continue;
+		}
 		name.textContent = name.textContent.replace("(p)","");
 		name.textContent = name.textContent.replace("(pt)","");
 		if (index > 562)
 			break;
 		name.textContent = name.textContent.split("(")[0];
-		console.log(name.textContent)
+		console.log("Attemping insert ", name.textContent);
 		
 		await recipeScraper(name.textContent);
 		await doSomething();
@@ -51,7 +61,7 @@ async function recipeScraper(recipe){
 		{
 			temp = temp.nextElementSibling;
 		}
-		console.log(temp.textContent);
+		var tempIngredients = temp.textContent;
 		
 		
 		var temp2 = dom.window.document.querySelector('[id^=Procedure]').parentNode.nextElementSibling;
@@ -59,13 +69,24 @@ async function recipeScraper(recipe){
 		{
 			temp2 = temp2.nextElementSibling;
 		}
-		console.log(temp2.textContent);
+		var tempProcedure = temp2.textContent;
 
 	}
 	catch (err)
 	{
 		console.log(err);
 	}
+	
+	MongoClient.connect(url, function(err, db) {
+	  if (err) throw err;
+	  var dbo = db.db("mydb");
+	  var myobj = { Recipe: recipe, Ingredients: tempIngredients, Procedure: tempProcedure };
+	  dbo.collection("Recipes").insertOne(myobj, function(err, res) {
+		  console.log("inserted", recipe, "\n");
+		if (err) throw err;
+		db.close();
+	  });
+	}); 
 	//return;
 }
 

@@ -3,7 +3,7 @@ var url = "mongodb+srv://group24:elevenbrethren@group24-ityll.mongodb.net/group2
 // create a client to mongodb
 var MongoClient = require('mongodb').MongoClient;
 
-MongoClient.connect(url, function(err, db) {
+MongoClient.connect(url, {useUnifiedTopology: true}, function(err, db) {
 	if (err) throw err;
 	var dbo = db.db("24-7_Recipes");
 	//var query = {  $text: { $search: "\"vanilla\"" }  };

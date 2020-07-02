@@ -45,7 +45,8 @@ app.use(express.json());
    const { email, password } = req.body;
   
    const db = client.db();
-   const results = await db.collection('Users').find({email:email,password:password}).toArray();
+   var dbo = db.db("maindb");
+   const results = await dbo.collection('Users').find({email:email,password:password}).toArray();
  
    var id = -1;
    var fn = '';
@@ -58,6 +59,7 @@ app.use(express.json());
      ln = results[0].lastName;
    }
  
+   db.close();
    var ret = { id:id, firstName:fn, lastName:ln, error:''};
    res.status(200).json(ret);
  });
@@ -74,11 +76,12 @@ app.use(express.json());
 
  
   const db = client.db();
-  const check = await db.collection('Users').find({email:email}).toArray();
+  var dbo = db.db("maindb");
+  const check = await dbo.collection('Users').find({email:email}).toArray();
 
   if (check.length > 0)
   {
-    error = "The email you have entered is already linked to an account."
+    error = "The email you have entered is already linked to an account.";
     var ret = { error: error };
     res.status(500).json(ret);
   }
@@ -86,47 +89,183 @@ app.use(express.json());
   {
     try
     {
-      const db = client.db();
-      const result = db.collection('Users').insertOne(newUser);
+      const result = dbo.collection('Users').insertOne(newUser);
+    }
+    catch(e)
+    {
+      error = e.toString();
+    }
+    
+    var ret = { error: error };
+    res.status(200).json(ret);
+  }
+  db.close();
+});
+
+app.post('/api/searchIngredients', async (req, res, next) => 
+{
+  // incoming: An array of ingredients
+  // outgoing: results[], error
+
+
+  var error = '';
+
+  const {ingredients} = req.body;
+
+  for (ingredient of ingredients)
+  {
+    ingredient = ingredient.trim();
+  }
+  
+  final_results = []
+
+  const db = client.db();
+  var dbo = db.db("maindb");
+  for (ingredient of ingredients)
+  {
+    dbo.collection("Recipes").find({Recipe:{'$regex' : recipe, '$options' : 'i'}},
+    { projection: { Recipe: 1} }).toArray(function(err, result) {
+      if (err) throw err;
+      for(r of result)
+      {
+        if(final_results.includes(r))
+        {
+          continue;
+        }
+        else
+        {
+          final_results.push(r);
+        }
+      }
+  });  
+  }
+  
+  db.close();
+  var ret = {results:final_results, error:error};
+  res.status(200).json(ret);
+});
+
+app.post('/api/searchRecipe', async (req, res, next) => 
+{
+  // incoming: String containing Recipe Name
+  // outgoing: results[], error
+
+  var error = '';
+
+  const {recipe} = req.body;
+
+  recipe = recipe.trim();
+  
+  const db = client.db();
+  var dbo = db.db("maindb");
+
+ dbo.collection("Recipes").find({Recipe:{'$regex' : recipe, '$options' : 'i'}},
+  { projection: { Recipe: 1} }).toArray(function(err, result) {
+    if (err) throw err;
+  });
+
+  db.close();
+  var ret = {results:result, error:error};
+  res.status(200).json(ret);
+});
+
+app.post('/api/addRecipe', async (req, res, next) =>
+{
+  // incoming: Recipe, Ingredients, Procedures, UserId 
+  // outgoing: error
+
+  const { recipe, ingredients, procedures, userId } = req.body;
+
+  const newRecipe = {Recipe:recipe, Ingredients:ingredients, Procedures:procedures, userId:userId};
+  var error = '';
+
+ 
+  const db = client.db();
+  var dbo = db.db("maindb");
+  const check = await dbo.collection('Recipes').find({Recipe:recipe}).toArray();
+
+  if (check.length > 0)
+  {
+    error = "The recipe you wish to enter already exists.";
+    var ret = { error: error };
+    res.status(500).json(ret);
+  }
+  else
+  {
+    try
+    {
+      const result = dbo.collection('Recipes').insertOne(newRecipe);
     }
     catch(e)
     {
       error = e.toString();
     }
 
+    db.close();
     var ret = { error: error };
     res.status(200).json(ret);
   }
 });
 
-app.post('/api/searchIngredients', async (req, res, next) => 
+app.delete('/api/deleteRecipe', async (req, res, next) =>
 {
-  // incoming: 
-  // outgoing: results[], error
+  // incoming: Recipe, userId 
+  // outgoing: error
 
-  // TODO: Finish this endpoint (change from cards stuff to our project)
+  const { recipe, userId } = req.body;
 
   var error = '';
 
-  const { userId, search } = req.body;
-
-  var _search = search.trim();
-  
+  var myquery = { Recipe: recipe, userId: userId };
+ 
   const db = client.db();
-  const results = await db.collection('Cards').find({"Card":{$regex:_search+'.*', $options:'r'}}).toArray();
-  
-  var _ret = [];
-  for( var i=0; i<results.length; i++ )
-  {
-    _ret.push( results[i].Card );
-  }
-  
-  var ret = {results:_ret, error:error};
-  res.status(200).json(ret);
+  var dbo = db.db("maindb");
+  // const check = await dbo.collection('Recipes').find({userId: userId, Recipe: recipe }).toArray();
+
+    try
+    {
+      const result = dbo.collection('Recipes').deletetOne(myquery);
+    }
+    catch(e)
+    {
+      error = e.toString();
+    }
+
+    db.close();
+
+    if (error.localeCompare("") == 0)
+    {
+      var ret = { error: error };
+      res.status(200).json(ret);
+    }
+    else
+    {
+      var ret = { error: error };
+      res.status(500).json(ret);
+    }
 });
 
+app.post('/api/viewRecipe', async (req, res, next) => 
+{
+  // incoming: Recipe
+  // outgoing: Recipe, ingredients, procedure, error
 
- 
+  var error = '';
+
+  const {recipe} = req.body;
+  
+  const db = client.db();
+  var dbo = db.db("maindb");
+
+ dbo.collection("Recipes").find({Recipe: recipe},
+  { projection: { Recipe: 1, Ingredients: 1 , Procedure: 1}}).toArray(function(err, result) {
+    if (err) throw err;
+  });
+
+  db.close();
+  var ret = {results:result, error:error};
+  res.status(200).json(ret);
+});
 
 
 //const recipesRouter = require('./routes/recipes');

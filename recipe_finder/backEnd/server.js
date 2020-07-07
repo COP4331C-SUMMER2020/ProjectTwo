@@ -76,7 +76,7 @@ app.use(express.json());
 
  
   const db = client.db();
-  var dbo = db.db("maindb");
+  var dbo = db.db("maindb");                                  
   const check = await dbo.collection('Users').find({email:email}).toArray();
 
   if (check.length > 0)

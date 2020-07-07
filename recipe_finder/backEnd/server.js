@@ -71,7 +71,7 @@ app.use(express.json());
 
   const { firstName, lastName, email, password } = req.body;
 
-  const newUser = {email:email, password:password, firstName:firstName, lastName:lastName};
+  const newUser = {email:email, password:password, firstName:firstName, lastName:lastName, temporarytoken: jwt.sign(payload, keys.secretOrKey, {expiresIn: 12000})};
   var error = '';
 
  

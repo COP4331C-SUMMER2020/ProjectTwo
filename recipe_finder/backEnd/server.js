@@ -44,9 +44,9 @@ app.use(express.json());
  
    const { email, password } = req.body;
   
-   const db = client.db();
-   var dbo = db.db("maindb");
-   const results = await dbo.collection('Users').find({email:email,password:password}).toArray();
+   const db = client.db("maindb");
+   //var dbo = db.db("maindb");
+   const results = await db.collection('Users').find({email:email,password:password}).toArray();
  
    var id = -1;
    var fn = '';
@@ -58,8 +58,14 @@ app.use(express.json());
      fn = results[0].firstName;
      ln = results[0].lastName;
    }
+   else
+   {
+    error = "Invalid email and password combination";
+    var ret = { error: error };
+    res.status(500).json(ret);
+   }
  
-   db.close();
+   //db.close("maindb");
    var ret = { id:id, firstName:fn, lastName:ln, error:''};
    res.status(200).json(ret);
  });
@@ -71,13 +77,12 @@ app.use(express.json());
 
   const { firstName, lastName, email, password } = req.body;
 
-  const newUser = {email:email, password:password, firstName:firstName, lastName:lastName, temporarytoken: jwt.sign(payload, keys.secretOrKey, {expiresIn: 12000})};
+  const newUser = {email:email, password:password, firstName:firstName, lastName:lastName}; //temporarytoken: jwt.sign(payload, keys.secretOrKey, {expiresIn: 12000})};
   var error = '';
 
- 
-  const db = client.db();
-  var dbo = db.db("maindb");
-  const check = await dbo.collection('Users').find({email:email}).toArray();
+  const db = client.db("maindb");
+  //var dbo = db("maindb");
+  const check = await db.collection('Users').find({email:email}).toArray();
 
   if (check.length > 0)
   {
@@ -89,7 +94,7 @@ app.use(express.json());
   {
     try
     {
-      const result = dbo.collection('Users').insertOne(newUser);
+      const result = db.collection('Users').insertOne(newUser);
     }
     catch(e)
     {
@@ -99,7 +104,6 @@ app.use(express.json());
     var ret = { error: error };
     res.status(200).json(ret);
   }
-  db.close();
 });
 
 app.post('/api/searchIngredients', async (req, res, next) => 

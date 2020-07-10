@@ -18,9 +18,20 @@ const userSchema = new Schema({
       unique: false,
       trim: false
   },
+
+  firstName: {
+    type: String,
+    required: true
+  },
+
+  lastName: {
+    type: String,
+    required: true
+  },
+
   temporarytoken: {
 	  type: String,
-	  required: true
+	  required: false
   },
   active: {
 	  type: Boolean,

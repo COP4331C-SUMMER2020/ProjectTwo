@@ -29,6 +29,11 @@ const userSchema = new Schema({
     required: true
   },
 
+  validation: {
+    type: Boolean,
+    required: true
+  },
+
   temporarytoken: {
 	  type: String,
 	  required: false

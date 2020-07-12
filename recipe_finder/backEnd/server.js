@@ -76,8 +76,9 @@ app.use(express.json());
   // outgoing: error
 
   const { firstName, lastName, email, password } = req.body;
+  var validation = false;
 
-  const newUser = {email:email, password:password, firstName:firstName, lastName:lastName}; //temporarytoken: jwt.sign(payload, keys.secretOrKey, {expiresIn: 12000})};
+  const newUser = {email:email, password:password, firstName:firstName, lastName:lastName, validated:validation}; //temporarytoken: jwt.sign(payload, keys.secretOrKey, {expiresIn: 12000})};
   var error = '';
 
   const db = client.db("maindb");
@@ -121,15 +122,17 @@ app.post('/api/searchIngredients', async (req, res, next) =>
     ingredient = ingredient.trim();
   }
   
-  final_results = []
+  final_results = [];
 
-  const db = client.db();
-  var dbo = db.db("maindb");
+  const db = client.db("maindb");
+  //var dbo = db.db("maindb");
   for (ingredient of ingredients)
   {
-    dbo.collection("Recipes").find({Recipe:{'$regex' : recipe, '$options' : 'i'}},
+    //console.log(ingredient);
+    db.collection("Recipes").find({Ingredients:{$regex : ingredient, $options : 'i'}},
     { projection: { Recipe: 1} }).toArray(function(err, result) {
       if (err) throw err;
+      //console.log(result);
       for(r of result)
       {
         if(final_results.includes(r))
@@ -141,12 +144,16 @@ app.post('/api/searchIngredients', async (req, res, next) =>
           final_results.push(r);
         }
       }
+      if (final_results.length == 0)
+      {
+        error = "No recipes found."
+      }
+      
+      //db.close();
+      var ret = {results:final_results, error:error};
+      res.status(200).json(ret);  
   });  
-  }
-  
-  db.close();
-  var ret = {results:final_results, error:error};
-  res.status(200).json(ret);
+  } 
 });
 
 app.post('/api/searchRecipe', async (req, res, next) => 
@@ -156,21 +163,30 @@ app.post('/api/searchRecipe', async (req, res, next) =>
 
   var error = '';
 
-  const {recipe} = req.body;
+  const { Recipe } = req.body;
+  console.log(Recipe);
 
-  recipe = recipe.trim();
+  const finalRecipe = Recipe.trim();
   
-  const db = client.db();
-  var dbo = db.db("maindb");
+  const db = client.db("maindb");
+  //var dbo = db.db("maindb");
 
- dbo.collection("Recipes").find({Recipe:{'$regex' : recipe, '$options' : 'i'}},
+ db.collection("Recipes").find({Recipe:{$regex:finalRecipe, $options : 'i'}},
   { projection: { Recipe: 1} }).toArray(function(err, result) {
     if (err) throw err;
+    
+    console.log(result);
+
+    if (result.length == 0)
+    {
+      error = "No recipes found."
+    }
+    var ret = {results:result, error:error};
+    res.status(200).json(ret);
   });
 
-  db.close();
-  var ret = {results:result, error:error};
-  res.status(200).json(ret);
+  //db.close();
+  
 });
 
 app.post('/api/addRecipe', async (req, res, next) =>
@@ -178,15 +194,16 @@ app.post('/api/addRecipe', async (req, res, next) =>
   // incoming: Recipe, Ingredients, Procedures, UserId 
   // outgoing: error
 
-  const { recipe, ingredients, procedures, userId } = req.body;
+  const { Recipe, Ingredients, Procedure, userId } = req.body;
 
-  const newRecipe = {Recipe:recipe, Ingredients:ingredients, Procedures:procedures, userId:userId};
+  const newRecipe = {Recipe:Recipe, Ingredients:Ingredients, Procedure:Procedure, userId:userId};
+  console.log(newRecipe);
   var error = '';
 
  
-  const db = client.db();
-  var dbo = db.db("maindb");
-  const check = await dbo.collection('Recipes').find({Recipe:recipe}).toArray();
+  const db = client.db("maindb");
+  //var dbo = db.db("maindb");
+  const check = await db.collection('Recipes').find({Recipe:Recipe}).toArray();
 
   if (check.length > 0)
   {
@@ -198,14 +215,16 @@ app.post('/api/addRecipe', async (req, res, next) =>
   {
     try
     {
-      const result = dbo.collection('Recipes').insertOne(newRecipe);
+      const result = db.collection('Recipes').insertOne(newRecipe);
     }
     catch(e)
     {
       error = e.toString();
+      var ret = { error: error };
+      res.status(500).json(ret);
     }
 
-    db.close();
+    //db.close();
     var ret = { error: error };
     res.status(200).json(ret);
   }
@@ -216,26 +235,26 @@ app.delete('/api/deleteRecipe', async (req, res, next) =>
   // incoming: Recipe, userId 
   // outgoing: error
 
-  const { recipe, userId } = req.body;
+  const { Recipe, userId } = req.body;
 
   var error = '';
 
-  var myquery = { Recipe: recipe, userId: userId };
+  var deleteQuery = { Recipe: Recipe, userId: userId };
  
-  const db = client.db();
-  var dbo = db.db("maindb");
+  const db = client.db("maindb");
+  //var dbo = db.db("maindb");
   // const check = await dbo.collection('Recipes').find({userId: userId, Recipe: recipe }).toArray();
 
     try
     {
-      const result = dbo.collection('Recipes').deletetOne(myquery);
+      const result = db.collection('Recipes').remove(deleteQuery);
     }
     catch(e)
     {
       error = e.toString();
     }
 
-    db.close();
+   // db.close();
 
     if (error.localeCompare("") == 0)
     {
@@ -256,19 +275,20 @@ app.post('/api/viewRecipe', async (req, res, next) =>
 
   var error = '';
 
-  const {recipe} = req.body;
+  const {Recipe} = req.body;
   
-  const db = client.db();
-  var dbo = db.db("maindb");
+  const db = client.db("maindb");
+ // var dbo = db.db("maindb");
 
- dbo.collection("Recipes").find({Recipe: recipe},
+ db.collection("Recipes").find({Recipe: Recipe},
   { projection: { Recipe: 1, Ingredients: 1 , Procedure: 1}}).toArray(function(err, result) {
     if (err) throw err;
+    var ret = {results:result[0], error:error};
+    res.status(200).json(ret);
   });
 
-  db.close();
-  var ret = {results:result, error:error};
-  res.status(200).json(ret);
+  //db.close();
+
 });
 
 

@@ -21,6 +21,8 @@
 const express = require('express');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
+const bcrypt = require('bcrypt');
+SALT_WORK_FACTOR = 10;
 
 require('dotenv').config();
 
@@ -45,8 +47,10 @@ app.use(express.json());
    const { email, password } = req.body;
   
    const db = client.db("maindb");
+
+   //const passCheck = await db.collection('Users').find({email:email}, { projection: { password: 1} }).toArray();
    //var dbo = db.db("maindb");
-   const results = await db.collection('Users').find({email:email,password:password}).toArray();
+   const results = await db.collection('Users').find({email:email}).toArray();
  
    var id = -1;
    var fn = '';
@@ -54,13 +58,22 @@ app.use(express.json());
  
    if( results.length > 0 )
    {
-     id = results[0].userID;
-     fn = results[0].firstName;
-     ln = results[0].lastName;
+    if(bcrypt.compareSync(password, results[0].password))
+    {
+      id = results[0].userID;
+      fn = results[0].firstName;
+      ln = results[0].lastName;
+    }
+    else
+    {
+      error = "Invalid email and password combination.";
+      var ret = { error: error };
+      res.status(500).json(ret);
+    }
    }
    else
    {
-    error = "Invalid email and password combination";
+    error = "There is no account affialiated with that email.";
     var ret = { error: error };
     res.status(500).json(ret);
    }
@@ -78,7 +91,9 @@ app.use(express.json());
   const { firstName, lastName, email, password } = req.body;
   var validation = false;
 
-  const newUser = {email:email, password:password, firstName:firstName, lastName:lastName, validated:validation}; //temporarytoken: jwt.sign(payload, keys.secretOrKey, {expiresIn: 12000})};
+  let passwordHash = bcrypt.hashSync(password, SALT_WORK_FACTOR);
+
+  const newUser = {email:email, password:passwordHash, firstName:firstName, lastName:lastName, validated:validation}; //temporarytoken: jwt.sign(payload, keys.secretOrKey, {expiresIn: 12000})};
   var error = '';
 
   const db = client.db("maindb");

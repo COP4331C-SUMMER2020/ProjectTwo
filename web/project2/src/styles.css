@@ -3,14 +3,14 @@ body {
   padding: 0;
   background: linear-gradient(indigo, navy);
   height: 100vh;
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: Ubuntu, Verdana, Geneva, sans-serif;
   color: white;
   text-align: center;
 }
 
 h1 {
   font-weight: 100;
-  font-size: 3rem;
+  font-size: 2rem;
   letter-spacing: 0.02em;
   margin-bottom: 0;
 }
@@ -18,10 +18,11 @@ h1 {
 .container {
   margin: 0 auto;
   width: 500px;
+  display: inline-block;
 }
 
 input {
-  width: 100%;
+  width: 75%;
   font-size: 1.5rem;
   padding: 0.25em;
   margin-top: 0.5em;
@@ -33,6 +34,18 @@ button {
   font-size: 1.3rem;
   margin: 1em;
   padding: 0.2em 0.5em;
+}
+
+textarea {
+	background: black;
+	color: white;
+	width: 100%;
+	font-size: 1.5rem;
+	padding: 0.25em;
+	margin-top: 0.5em;
+	border: 3px solid black;
+	height: 300px;
+	width: 500px;
 }
 
 .error-input {

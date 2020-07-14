@@ -3,24 +3,12 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
-import useFormValidation from "./useFormValidation";
-import validateAuth from "./validateAuth";
-
 const INITIAL_STATE = {
   email: "",
   password: ""
 };
 
 function Index() {
-	const {
-		handleSubmit,
-		handleChange,
-		handleBlur,
-		values,
-		errors,
-		isSubmitting
-	} = useFormValidation(INITIAL_STATE, validateAuth);
-	
 	return (
 		<div>
 			<div>
@@ -54,29 +42,35 @@ function APIreturn() {
 }
 
 function AddRecipe() {
-	const {
-		handleSubmit,
-		handleChange,
-		handleBlur,
-		values,
-		errors,
-		isSubmitting
-	} = useFormValidation(INITIAL_STATE, validateAuth);
+	function handleClick(e) {
+		e.preventDefault();
+		console.log('You clicked add!');
+		
+		var ingredient = document.getElementById("newrecipename").value;
+		
+		document.getElementById("newrecipename").innerHTML = "";
+		
+		var jsonPayload = '{"recipe" : "' + ingredient + '"}';
+		
+		document.getElementById("apireturn").innerHTML = jsonPayload;
+	}
 	
 	return (
 		<div className="container">
 			<h1>Add Recipe</h1>
-			<form onSubmit={handleSubmit}>
+			<form>
 				<input
-					onChange={handleChange}
-					onBlur={handleBlur}
-					name="newrecipename"
-					autoComplete="off"
-					placeholder="Recipe Name"
+				 id="newrecipename"
+				 name="newrecipename"
+				 autoComplete="off"
+				 placeholder="Recipe Name"
 				/>
 				<div>
-				<button disabled={isSubmitting} type="submit">
-					Submit
+				<button
+				 type="button"
+				 onClick={handleClick}
+				 type="submit">
+					Search
 				</button>
 				</div>
 			</form>
@@ -85,29 +79,35 @@ function AddRecipe() {
 }
 
 function IngredientSearch() {
-	const {
-		handleSubmit,
-		handleChange,
-		handleBlur,
-		values,
-		errors,
-		isSubmitting
-	} = useFormValidation(INITIAL_STATE, validateAuth);
+	function handleClick(e) {
+		e.preventDefault();
+		console.log('You clicked search!');
+		
+		var ingredient = document.getElementById("ingredientname").value;
+		
+		document.getElementById("ingredientname").innerHTML = "";
+		
+		var jsonPayload = '{"ingredient" : "' + ingredient + '"}';
+		
+		document.getElementById("apireturn").innerHTML = jsonPayload;
+	}
 	
 	return (
 		<div className="container">
 			<h1>Ingredient Search</h1>
-			<form onSubmit={handleSubmit}>
+			<form>
 				<input
-					onChange={handleChange}
-					onBlur={handleBlur}
-					name="ingredientname"
-					autoComplete="off"
-					placeholder="Search Term"
+				 id="ingredientname"
+				 name="ingredientname"
+				 autoComplete="off"
+				 placeholder="Search Term"
 				/>
 				<div>
-				<button disabled={isSubmitting} type="submit">
-					Submit
+				<button
+				 type="button"
+				 onClick={handleClick}
+				 type="submit">
+					Search
 				</button>
 				</div>
 			</form>
@@ -116,29 +116,35 @@ function IngredientSearch() {
 }
 
 function RecipeSearch() {
-	const {
-		handleSubmit,
-		handleChange,
-		handleBlur,
-		values,
-		errors,
-		isSubmitting
-	} = useFormValidation(INITIAL_STATE, validateAuth);
+	function handleClick(e) {
+		e.preventDefault();
+		console.log('You clicked search but different!');
+		
+		var ingredient = document.getElementById("recipename").value;
+		
+		document.getElementById("recipename").innerHTML = "";
+		
+		var jsonPayload = '{"recipe" : "' + ingredient + '"}';
+		
+		document.getElementById("apireturn").innerHTML = jsonPayload;
+	}
 	
 	return (
 		<div className="container">
 			<h1>Recipe Search</h1>
-			<form onSubmit={handleSubmit}>
+			<form>
 				<input
-					onChange={handleChange}
-					onBlur={handleBlur}
-					name="recipename"
-					autoComplete="off"
-					placeholder="Search Term"
+				 id="recipename"
+				 name="recipename"
+				 autoComplete="off"
+				 placeholder="Search Term"
 				/>
 				<div>
-				<button disabled={isSubmitting} type="submit">
-					Submit
+				<button
+				 type="button"
+				 onClick={handleClick}
+				 type="submit">
+					Search
 				</button>
 				</div>
 			</form>
@@ -147,95 +153,91 @@ function RecipeSearch() {
 }
 
 function Login() {
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    isSubmitting
-  } = useFormValidation(INITIAL_STATE, validateAuth);
-  // const [email, setEmail] = React.useState("");
-  // const [password, setPassword] = React.useState("");
+	function handleClick(e) {
+		e.preventDefault();
+		console.log('You clicked login!');
+		
+		var username = document.getElementById("loginemail").value;
+		var lPassword = document.getElementById("loginpassword").value;
+		
+		document.getElementById("loginemail").innerHTML = "";
+		document.getElementById("loginpassword").innerHTML = "";
+		
+		var jsonPayload = '{"login" : "' + username + '", "password" : "' + lPassword + '"}';
+		
+		document.getElementById("apireturn").innerHTML = jsonPayload;
+	}
 
-  return (
-    <div className="container">
-      <h1>Login Test</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          onChange={handleChange}
-          onBlur={handleBlur}
-          name="loginemail"
-          value={values.email}
-          className={errors.email && "error-input"}
-          autoComplete="off"
-          placeholder="Your email address"
-        />
-        {errors.email && <p className="error-text">{errors.email}</p>}
-        <input
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-          className={errors.password && "error-input"}
-          name="loginpassword"
-          type="password"
-          placeholder="Choose a safe password"
-        />
-        {errors.password && <p className="error-text">{errors.password}</p>}
-        <div>
-          <button disabled={isSubmitting} type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+	return (
+		<div className="container">
+			<h1>Login Test</h1>
+			<form>
+				<input
+				 id="loginemail"
+				 name="loginemail"
+				 autoComplete="off"
+				 placeholder="Your email address"
+				/>
+				<input
+				 id="loginpassword"
+				 name="loginpassword"
+				 type="password"
+				 placeholder="Choose a safe password"
+				/>
+				<div>
+					<button
+					 type="button"
+					 onClick={handleClick}
+					 type="submit">
+						Login
+					</button>
+				</div>
+			</form>
+		</div>
+	);
 }
 
 function Register() {
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    isSubmitting
-  } = useFormValidation(INITIAL_STATE, validateAuth);
-  // const [email, setEmail] = React.useState("");
-  // const [password, setPassword] = React.useState("");
+	function handleClick(e) {
+		e.preventDefault();
+		console.log('You clicked register!');
+		
+		var username = document.getElementById("registeremail").value;
+		var lPassword = document.getElementById("registerpassword").value;
+		
+		document.getElementById("registeremail").innerHTML = "";
+		document.getElementById("registerpassword").innerHTML = "";
+		
+		var jsonPayload = '{"login" : "' + username + '", "password" : "' + lPassword + '"}';
+		
+		document.getElementById("apireturn").innerHTML = jsonPayload;
+	}
 
-  return (
-    <div className="container">
-      <h1>Register Test</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          onChange={handleChange}
-          onBlur={handleBlur}
-          name="registeremail"
-          value={values.email}
-          className={errors.email && "error-input"}
-          autoComplete="off"
-          placeholder="Your email address"
-        />
-        {errors.email && <p className="error-text">{errors.email}</p>}
-        <input
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-          className={errors.password && "error-input"}
-          name="registerpassword"
-          type="password"
-          placeholder="Choose a safe password"
-        />
-        {errors.password && <p className="error-text">{errors.password}</p>}
-        <div>
-          <button disabled={isSubmitting} type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+	return (
+		<div className="container">
+			<h1>Register Test</h1>
+			<input
+			 id="registeremail"
+			 name="registeremail"
+			 autoComplete="off"
+			 placeholder="Your email address"
+			/>
+			<input
+			 id="registerpassword"
+			 name="registerpassword"
+			 type="password"
+			 placeholder="Choose a safe password"
+			/>
+			<div>
+				<button
+				 type="button"
+				 onClick={handleClick}
+				 type="submit">
+					Register
+				</button>
+			</div>
+		</div>
+	);
 }
 
 const rootElement = document.getElementById("root");

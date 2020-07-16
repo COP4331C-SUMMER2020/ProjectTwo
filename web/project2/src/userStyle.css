@@ -8,60 +8,21 @@ body {
   background-size: cover;
   height: 100vh;
   font-family: Ubuntu, Verdana, Geneva, sans-serif;
-  color: black;
+  color: red;
   text-align: center;
 }
 
 h1 {
-  font-weight: 300;
+  font-weight: 100;
   font-size: 2rem;
   letter-spacing: 0.02em;
   margin-bottom: 0;
-}
-
-h2 {
-	font-weight: 300;
-	font-size: 2rem;
-	letter-spacing: 0.02em;
-	margin-bottom: 1.35em;
-}
-
-nav {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	min-height: 0vh;
-}
-
-li {
-	display: inline-block;
-	color: black;
-	font-family: Ubuntu, Verdana, Geneva, sans-serif;
-	font-size: 2rem;
-	font-weight: 300;
-	letter-spacing: 0.02em;
-	padding: 0.5em;
-	padding-top: 0em;
-}
-
-.nav-links {
-	width: 40%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
 }
 
 .container {
   margin: 0 auto;
   width: 500px;
   display: inline-block;
-  justify-content: space-around;
-}
-
-.outerContainer {
-	margin: 0 auto;
-	width: 100%;
-	justify-content: space-around;
 }
 
 input {
@@ -74,7 +35,7 @@ input {
 
 button {
 	color: gray;
-	background-color: white;
+	background-color: Transparent;
 	border: none;
 	font-family: Ubuntu, Verdana, Geneva, sans-serif;
 	font-size: 2rem;

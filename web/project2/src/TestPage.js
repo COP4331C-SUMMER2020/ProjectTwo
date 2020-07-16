@@ -1,31 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {render} from "react-dom";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
 
-import Home from "./Home";
-import User from "./User";
-import Nav from "./Nav";
-import TestPage from "./TestPage";
-
-import "./styles.css";
-
-const INITIAL_STATE = {
-  email: "",
-  password: ""
-};
-
-function Index() {
-	return (
-		<BrowserRouter>
-			<div className="outerContainer">
-				<Nav />
-				<Route path='/home' exact component={Home} />
-				<Route path='/user' exact component={User} />
-				<Route path='/testpage' exact component={TestPage} />
+export default class TestPage extends React.Component {
+	render() {
+		return (
+			<div>
+				<div>
+					<Register />
+					<Login />
+				</div>
+				<div>
+					<RecipeSearch />
+					<IngredientSearch />
+					<AddRecipe />
+				</div>
+				<div>
+					<APIreturn />
+				</div>
 			</div>
-		</BrowserRouter>
-	);
+		);
+	}
 }
 
 function APIreturn() {
@@ -240,6 +234,3 @@ function Register() {
 		</div>
 	);
 }
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Index />, rootElement);

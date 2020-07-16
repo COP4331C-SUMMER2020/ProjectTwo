@@ -23,6 +23,16 @@ const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const bcrypt = require('bcrypt');
 SALT_WORK_FACTOR = 10;
+const sgMail = require('@sendgrid/mail');
+const first = "SG.";
+const second = "vLpMY_RA";
+const third = "SAi7s4YIUJQ";
+const fourth = "1SQ.b_zjVlEotBBNW9Zh-NcOBnIT";
+const fifth = "gNx-UibRYnitnHK0snU";
+const last = first + second + third + fourth + fifth;
+sgMail.setApiKey(last);
+var ObjectId = require('mongodb').ObjectID;
+
 
 require('dotenv').config();
 
@@ -58,9 +68,15 @@ app.use(express.json());
  
    if( results.length > 0 )
    {
-    if(bcrypt.compareSync(password, results[0].password))
+	if(results[0].validated == false)
+	{
+		error = "Please finish activating your account by verifying your email.";
+		var ret = { error: error };
+		res.status(500).json(ret);
+	}
+    else if(bcrypt.compareSync(password, results[0].password))
     {
-      id = results[0].userID;
+      id = results[0]._id;
       fn = results[0].firstName;
       ln = results[0].lastName;
     }
@@ -79,7 +95,7 @@ app.use(express.json());
    }
  
    //db.close("maindb");
-   var ret = { id:id, firstName:fn, lastName:ln, error:''};
+   var ret = { _id:id, firstName:fn, lastName:ln, error:''};
    res.status(200).json(ret);
  });
 
@@ -111,6 +127,15 @@ app.use(express.json());
     try
     {
       const result = db.collection('Users').insertOne(newUser);
+	  //re-search for this user, send objectID with email
+	  const msg = {
+	  to: email,
+      from: '24.7recipefinder@gmail.com',
+      subject: 'Confirmation email',
+      text: 'Please click the following link to verify your email:',
+      };
+	  sgMail.send(msg);
+	  
     }
     catch(e)
     {
@@ -212,7 +237,7 @@ app.post('/api/addRecipe', async (req, res, next) =>
   const { Recipe, Ingredients, Procedure, userId } = req.body;
 
   const newRecipe = {Recipe:Recipe, Ingredients:Ingredients, Procedure:Procedure, userId:userId};
-  console.log(newRecipe);
+  //console.log(newRecipe);
   var error = '';
 
  
@@ -251,7 +276,7 @@ app.delete('/api/deleteRecipe', async (req, res, next) =>
   // outgoing: error
 
   const { Recipe, userId } = req.body;
-
+  //var userId2 = "ObjectId(\"" + userId + "\")";
   var error = '';
 
   var deleteQuery = { Recipe: Recipe, userId: userId };
@@ -303,6 +328,75 @@ app.post('/api/viewRecipe', async (req, res, next) =>
   });
 
   //db.close();
+
+});
+
+app.post('/api/confirm', async (req, res, next) => 
+{
+  // incoming: UserId
+  // outgoing: error
+
+   var error = '';
+ 
+   const { userId } = req.body;
+   //var userObjectId = "ObjectId(\"" + userId + "\")"; 
+   var test = new ObjectId(userId);
+   //var myquery = { _id: test };
+   var newvalues = { $set: {validated: true } };
+   
+   
+   const db = client.db("maindb");
+
+   //const passCheck = await db.collection('Users').find({email:email}, { projection: { password: 1} }).toArray();
+   //var dbo = db.db("maindb");
+   const results = await db.collection('Users').find({_id:test}).toArray();
+   //console.log(userObjectId);
+   //console.log(test);
+   if( results.length > 0 )
+   {
+	   console.log(results[0]);
+	   db.collection("Users").updateOne({ _id : test },{ $set : { validated:true } }, function(err, res) {
+			if (err) throw err;
+			console.log("1 document updated");
+			
+	   });
+	   var ret = {error:error};
+	   res.status(200).json(ret);
+   }
+   else
+   {
+	   error = "No records found.";
+	   var ret = {error:error};
+	   res.status(500).json(ret);
+	   
+   }
+	
+
+});
+
+app.post('/api/reset', async (req, res, next) => 
+{
+  // incoming: password, userId
+  // outgoing: error
+
+  var error = '';
+
+  const { userId, password } = req.body;
+  var test = new ObjectId(userId);
+  var myquery = { _id: test };
+  let passwordHash = bcrypt.hashSync(password, SALT_WORK_FACTOR);
+  var newvalues = { $set: {password: passwordHash } };
+  const db = client.db("maindb");
+  
+  const results = await db.collection('Users').find({_id:test}).toArray();
+   
+   if( results.length > 0 )
+   {
+	   db.collection("Users").updateOne(myquery, newvalues);
+   }
+  var ret = {error:error};
+   res.status(200).json(ret);
+
 
 });
 

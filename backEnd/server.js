@@ -400,6 +400,40 @@ app.post('/api/reset', async (req, res, next) =>
 
 });
 
+app.post('/api/email', async (req, res, next) => 
+{
+  // incoming: email
+  // outgoing: error (sends email to user with a link to a reset page. Link contains their _id)
+
+  var error = '';
+
+  const { email } = req.body;
+  const db = client.db("maindb");
+  
+  const results = await db.collection('Users').find({email:email}).toArray();
+   
+  if( results.length > 0 )
+  {
+    const msg = {
+      to: email,
+        from: '24.7recipefinder@gmail.com',
+        subject: 'Confirmation email',
+        text: 'Please click the following link to reset your password:',
+        };
+      sgMail.send(msg);
+
+    var ret = {error:error};
+    res.status(200).json(ret);
+  }
+  else
+  {
+    error = "The email you have entered is not associated with an account."
+    var ret = {error:error}
+    res.status(500).json(ret);
+  }
+
+});
+
 
 //const recipesRouter = require('./routes/recipes');
 //const usersRouter = require('./routes/users');

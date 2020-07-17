@@ -402,6 +402,7 @@ app.post('/api/reset', async (req, res, next) =>
 
 app.post('/api/email', async (req, res, next) => 
 {
+  // This sends an email for when doing password reset
   // incoming: email
   // outgoing: error (sends email to user with a link to a reset page. Link contains their _id)
 
@@ -417,7 +418,7 @@ app.post('/api/email', async (req, res, next) =>
     const msg = {
       to: email,
         from: '24.7recipefinder@gmail.com',
-        subject: 'Confirmation email',
+        subject: 'Password Reset',
         text: 'Please click the following link to reset your password:',
         };
       sgMail.send(msg);

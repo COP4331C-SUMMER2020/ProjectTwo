@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import * as firebase from 'firebase';
 
 export default class HomeScreen extends React.Component {
 
@@ -10,12 +9,11 @@ export default class HomeScreen extends React.Component {
     }
 
     componentDidMount() {
-        const {email, displayName} = firebase.auth().currentUser;
-        this.setState({email, displayName});
+
     }
 
     signOutUser = () => {
-        firebase.auth().signOut();
+
     };
 
     render() {

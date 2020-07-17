@@ -1,0 +1,36 @@
+write-up plan for getting this shit done on time
+
+
+TODO for mobileApp team:
+
+1: Get someone to baby-sit me in making my current repo commit to GitHub with the
+    working mobile React App so I don't mess it up. (Make File formatting look good)
+2: Ask Leinecker how to make a custom 'useApiEndpoint();' hook that can be called
+    from both the React webApp and the ReactNative mobileApp because I still don't
+    fully understand hooks enough to write custom hooks and I need help
+3: Finish making custom API hooks that can be imported that will handle all POSTs and Receive all data needed from api endpoits
+4: Make a basic bare-bones page for each api endpoint (Honestly guys, I can't guarantee we will able to implement all the endpoints on mobile,
+                                                      so here are the must have endpoints implemented on mobile from a UX perspective)
+5: Finish routing for all the pages
+
+
+   *Pages that MUST be implemented for mobile app: 
+   (Other endpoints are stretch goals)
+6:    -createAccount/log-in/log-out (reset password might be for website only) (easy)
+7:    -inserting/deleting ingredients from the user's pantry (easy)
+8:   *-search for a recipe (dynamically be able to display hundreds of recipes to choose from them)(hard)
+9:    -Display searched for recipe using Stack routing *talk to be if interested in how that works
+
+
+TODO for Airam specifically:
+Know how make styles for all ReactNative elements we are going to use
+  *Example: <View></View>, <Button/>, ect..
+-Play around with my App.js code i (will have) committed, and see if you can
+ make shit look good. For now I'll focus do the routing, api-endpoints, and
+
+   |  Example: <Views></Views>, <Buttons/>, ... ect
+   |
+   |      Don't do much with headers if at all, we can get by with a basic one.
+   |      The pages are what we need to work
+
+Note to Airam: Don't worry about

@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import * as firebase from 'firebase';
 
 export default class RegisterScreen extends React.Component {
     state = {
@@ -11,15 +10,7 @@ export default class RegisterScreen extends React.Component {
     };
 
     handleSignUp = () => {
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(userCredentials => {
-                return userCredentials.user.updateProfile({
-                    displayName: this.state.name
-                });
-            })
-            .catch(error => this.setState({errorMessage: error.message}));
+
     };
 
     render() {
@@ -32,18 +23,18 @@ export default class RegisterScreen extends React.Component {
                 <View style={styles.form}>
                     <View>
                         <Text style={styles.inputTitle}>Full Name</Text>
-                        <TextInput 
-                            style={styles.input} 
-                            autoCapitalize="none" 
+                        <TextInput
+                            style={styles.input}
+                            autoCapitalize="none"
                             onChangeText={name => this.setState({name})}
                             value={this.state.name}
                         ></TextInput>
                     </View>
                     <View style={{marginTop: 32}}>
                         <Text style={styles.inputTitle}>Email Address</Text>
-                        <TextInput 
-                            style={styles.input} 
-                            autoCapitalize="none" 
+                        <TextInput
+                            style={styles.input}
+                            autoCapitalize="none"
                             onChangeText={email => this.setState({email})}
                             value={this.state.email}
                         ></TextInput>
@@ -51,10 +42,10 @@ export default class RegisterScreen extends React.Component {
 
                     <View style={{marginTop: 32}}>
                         <Text style={styles.inputTitle}>Password</Text>
-                        <TextInput 
-                            style={styles.input} 
-                            secureTextEntry 
-                            autoCapitalize="none" 
+                        <TextInput
+                            style={styles.input}
+                            secureTextEntry
+                            autoCapitalize="none"
                             onChangeText={password => this.setState({password})}
                             value={this.state.password}
                         ></TextInput>

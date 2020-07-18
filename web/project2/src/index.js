@@ -22,6 +22,9 @@ const INITIAL_STATE = {
 
 function Index() {
 	var id = 0;
+	
+	componentDidMount();
+	
 	return (
 		<CookiesProvider>
 			<BrowserRouter>
@@ -38,6 +41,21 @@ function Index() {
 			</BrowserRouter>
 		</CookiesProvider>
 	);
+}
+
+function componentDidMount() {
+	fetch('http://192.168.56.1:5000/api', {
+		method: 'GET',
+		headers: {
+			'Content-type': 'application/json',
+			'Accept': 'application/json'
+		}
+	}).then(res => {
+		console.log(res)
+		return res.json()
+	}).then(response => {
+		console.log(response)
+	})
 }
 
 const rootElement = document.getElementById("root");

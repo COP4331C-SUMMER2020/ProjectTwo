@@ -12,7 +12,20 @@ export default class Login extends React.Component {
 			document.getElementById("loginemail").innerHTML = "";
 			document.getElementById("loginpassword").innerHTML = "";
 			
-			var jsonPayload = '{"login" : "' + username + '", "password" : "' + lPassword + '"}';
+			var jsonPayload = '{"email" : "' + username + '", "password" : "' + lPassword + '"}';
+			
+			fetch('http://192.168.56.1:5000/api/login', {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: jsonPayload,
+			}).then(res => {
+				console.log(res)
+				return res.json()
+			}).then(response => {
+				console.log(response)
+			});
 		}
 
 		return (

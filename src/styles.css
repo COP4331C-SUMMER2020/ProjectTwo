@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  background-size: cover;
+  height: 100vh;
+  font-family: Ubuntu, Verdana, Geneva, sans-serif;
+  color: #424242;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 2rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0;
+}
+
+h2 {
+	font-weight: 300;
+	font-size: 2rem;
+	letter-spacing: 0.02em;
+	margin-bottom: 1.35em;
+}
+
+h3 {
+	font-weight: 300;
+	font-size: 5rem;
+	letter-spacing: 0.02em;
+	text-shadow: -0.5px  0.5px 0 #fff,
+				  0.5px  0.5px 0 #fff,
+				  0.5px -0.5px 0 #fff,
+				 -0.5px -0.5px 0 #fff;
+}
+
+h4 {
+	font-weight: 300;
+	font-size: 4rem;
+	letter-spacing: 0.02em;
+	margin-bottom: 0;
+	text-shadow: -0.5px  0.5px 0 #fff,
+				  0.5px  0.5px 0 #fff,
+				  0.5px -0.5px 0 #fff,
+				 -0.5px -0.5px 0 #fff;
+}
+
+nav {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 0vh;
+}
+
+li {
+	display: inline-block;
+	color: black;
+	font-family: Ubuntu, Verdana, Geneva, sans-serif;
+	font-size: 2rem;
+	font-weight: 300;
+	letter-spacing: 0.02em;
+	padding: 0.5em;
+	padding-top: 0em;
+}
+
+.nav-links {
+	width: 60%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.navClass {
+	background-image: url("main.png");
+	background-repeat: no-repeat;
+	background-size: 100vw;
+}
+
+.container {
+  margin: 0 auto;
+  width: 500px;
+  display: inline-block;
+  justify-content: space-around;
+}
+
+.homeContainer {
+	margin: 0 auto;
+	margin-top: 10%;
+	font-size:  2rem;
+	text-shadow: -0.5px  0.5px 0 #fff,
+				  0.5px  0.5px 0 #fff,
+				  0.5px -0.5px 0 #fff,
+				 -0.5px -0.5px 0 #fff;
+	width: 100%;
+	display: inline-block;
+}
+
+.outerContainer {
+	margin: 0 auto;
+	width: 100%;
+	justify-content: space-around;
+}
+
+.homePage {
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	top: 10vh;
+	background-image: url("home.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-color: 242424;
+}
+
+.registerPage {
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	top: 10vh;
+	background-image: url("home.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-color: 242424;
+}
+
+.registerButton {
+	color: #424242;
+	background-color: transparent;
+	border: 2px solid;
+	border-color: #424242;
+	border-radius: 5px;
+	font-family: Ubuntu, Verdana, Geneva, sans-serif;
+	font-size: 3rem;
+	margin: 0.5em;
+	padding: 0.2em 0.5em;
+	padding-bottom: 0.3em;
+}
+
+.registerButton2 {
+	color: #424242;
+	background-color: #E5E5E5;
+	border: 2px solid;
+	border-color: #424242;
+	border-radius: 5px;
+	font-family: Ubuntu, Verdana, Geneva, sans-serif;
+	font-size: 2rem;
+	margin: 0.5em;
+	padding: 0.2em 0.5em;
+	padding-bottom: 0.3em;
+}
+
+.userPage {
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	top: 10vh;
+	background-image: url("home.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+input {
+  width: 75%;
+  background-color: #F3F3F3;
+  font-family: Ubuntu, Verdana, Geneva, sans-serif;
+  font-size: 1.5rem;
+  padding: 0.25em;
+  margin-top: 0.5em;
+  border: 2px solid;
+  border-color: #424242;
+  border-radius: 5px;
+}
+
+button {
+	color: gray;
+	background-color: #F3F3F3;
+	border: none;
+	font-family: Ubuntu, Verdana, Geneva, sans-serif;
+	font-size: 2rem;
+	margin: 0.5em;
+	padding: 0.2em 0.5em;
+}
+
+textarea {
+	background: black;
+	color: white;
+	width: 100%;
+	font-size: 1.5rem;
+	padding: 0.25em;
+	margin-top: 0.5em;
+	border: 3px solid black;
+	height: 300px;
+	width: 500px;
+}
+
+.error-input {
+  border: 2px solid red;
+  border-radius: 4px;
+}
+
+.error-text {
+  margin: 0.25em 0 0 0;
+  padding: 0;
+  color: red;
+  font-style: bold;
+  font-size: 1.2rem;
+}

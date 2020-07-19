@@ -1,8 +1,11 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+import { setSessionCookie, getSessionCookie } from "./CookieHandler";
 
 export default class Login extends React.Component {
+	state = { redirect: null };
 	render() {
-		function handleClick(e) {
+		const handleSubmit = async e => {
 			e.preventDefault();
 			console.log('You clicked login!');
 			
@@ -11,6 +14,7 @@ export default class Login extends React.Component {
 			
 			document.getElementById("loginemail").innerHTML = "";
 			document.getElementById("loginpassword").innerHTML = "";
+			document.getElementById("loginButton").innerHTML = "Loading...";
 			
 			var jsonPayload = '{"email" : "' + username + '", "password" : "' + lPassword + '"}';
 			
@@ -20,12 +24,29 @@ export default class Login extends React.Component {
 					'Content-type': 'application/json',
 				},
 				body: jsonPayload,
-			}).then(res => {
-				console.log(res)
-				return res.json()
-			}).then(response => {
-				console.log(response)
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data);
+				if (data.error == "") {
+					setSessionCookie(data);
+					this.setState({ redirect: "/" });
+				}
+				else {
+					document.getElementById("errorReturn").innerHTML = data.error;
+				}
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+				document.getElementById("errorReturn").innerHTML = data.error;
+				return;
 			});
+			
+			document.getElementById("loginButton").innerHTML = "Login";
+		};
+		
+		if (this.state.redirect) {
+			return <Redirect to={this.state.redirect} />
 		}
 
 		return (
@@ -48,11 +69,16 @@ export default class Login extends React.Component {
 						<div>
 							<button
 							 type="button"
-							 onClick={handleClick}
+							 id="loginButton"
+							 onClick={handleSubmit}
 							 type="submit">
 								Login
 							</button>
 						</div>
+						<p
+						 id="errorReturn"
+						 className="errorReturn" 
+						/>
 					</form>
 				</div>
 			</div>

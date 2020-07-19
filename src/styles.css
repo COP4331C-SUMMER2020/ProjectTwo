@@ -63,6 +63,14 @@ li {
 	padding-top: 0em;
 }
 
+.errorReturn {
+	font-family: Ubuntu, Verdana, Geneva, sans-serif;
+	font-weight: 300;
+	font-size: 1rem;
+	letter-spacing: 0.02em;
+	color: red;
+}
+
 .nav-links {
 	width: 60%;
 	display: flex;

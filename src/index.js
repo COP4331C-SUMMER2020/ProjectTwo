@@ -12,11 +12,12 @@ import TestPage from "./TestPage";
 import Confirm from "./Confirm";
 import Reset from "./Reset";
 import Login from "./Login";
+import Logout from "./Logout";
 
 import "./styles.css";
 
 const INITIAL_STATE = {
-  email: "",
+  id: "",
   password: ""
 };
 
@@ -37,6 +38,7 @@ function Index() {
 					<Route path='/confirm' exact component={Confirm} />
 					<Route path='/reset' exact component={Reset} />
 					<Route path='/login' exact component={Login} />
+					<Route path='/logout' exact component={Logout} />
 				</div>
 			</BrowserRouter>
 		</CookiesProvider>

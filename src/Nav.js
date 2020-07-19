@@ -1,13 +1,20 @@
 import React from 'react';
 import './styles.css';
 import {Link} from 'react-router-dom';
+import { getSessionCookie } from './CookieHandler';
 
 function Nav(props) {
 	const navStyle = {
 		color: 'white'
 	};
 	
-	const isLoggedIn = props.isLoggedIn;
+	var isLoggedIn = false;
+	
+	var currentCookie = getSessionCookie();
+	if (currentCookie._id != undefined) {
+		isLoggedIn = true;
+		console.log(currentCookie);
+	}
 	
 	if(isLoggedIn) {
 		return <UserLink />
@@ -56,6 +63,9 @@ function UserLink(props) {
 				</Link>
 				<Link style={navStyle} to="/user">
 					<li>My Pantry</li>
+				</Link>
+				<Link style={navStyle} to="/logout">
+					<li>Logout</li>
 				</Link>
 			</ul>
 		</nav>

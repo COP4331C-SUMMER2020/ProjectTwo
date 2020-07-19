@@ -1,4 +1,5 @@
 import React from "react";
+import { setSessionCookie, getSessionCookie } from "./CookieHandler";
 
 export default class Login extends React.Component {
 	render() {
@@ -20,11 +21,13 @@ export default class Login extends React.Component {
 					'Content-type': 'application/json',
 				},
 				body: jsonPayload,
-			}).then(res => {
-				console.log(res)
-				return res.json()
-			}).then(response => {
-				console.log(response)
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
 			});
 		}
 

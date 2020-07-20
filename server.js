@@ -166,7 +166,8 @@ app.post('/api/searchIngredients', async (req, res, next) =>
     ingredient = ingredient.trim();
   }
   
-  final_results = [];
+  var final_results = [];
+  var counter = 0;
 
   const db = client.db("maindb");
   //var dbo = db.db("maindb");
@@ -179,25 +180,33 @@ app.post('/api/searchIngredients', async (req, res, next) =>
       //console.log(result);
       for(r of result)
       {
+		//console.log("top of for loop");
         if(final_results.includes(r))
         {
+		  //console.log("in the if statement: " + r);
           continue;
         }
         else
         {
+		  //console.log("in the else statement: " + r);
           final_results.push(r);
         }
+		//console.log("trying to fill");
       }
-      if (final_results.length == 0)
-      {
-        error = "No recipes found."
-      }
-      
-      //db.close();
-      var ret = {results:final_results, error:error};
-      res.status(200).json(ret);  
-  });  
-  } 
+      counter++;
+		if (counter == ingredients.length) {		  
+			if (final_results.length == 0)
+			{
+			error = "No recipes found."
+			}
+			var ret = {results:final_results, error:error};
+			res.status(200).json(ret); 
+		}
+      //db.close(); 
+	});
+	
+  }
+  //console.log("trying to send");
 });
 
 app.post('/api/searchRecipe', async (req, res, next) => 
@@ -337,7 +346,7 @@ app.post('/api/viewRecipe', async (req, res, next) =>
 
 app.post('/api/confirm', async (req, res, next) => 
 {
-  // incoming: UserId
+  // incoming: userId
   // outgoing: error
 
    var error = '';

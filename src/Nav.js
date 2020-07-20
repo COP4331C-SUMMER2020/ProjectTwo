@@ -31,12 +31,8 @@ function GuestLink(props) {
 	return (
 		<nav className="navClass">
 			<ul className="nav-links">
-				<h2></h2>
 				<Link style={navStyle} to="/">
 					<li>24/7 Recipes</li>
-				</Link>
-				<Link style={navStyle} to="/testpage">
-					<li>Test Page</li>
 				</Link>
 				<Link style={navStyle} to="/login">
 					<li>Login</li>
@@ -54,12 +50,8 @@ function UserLink(props) {
 	return (
 		<nav className="navClass">
 			<ul className="nav-links">
-				<h2></h2>
 				<Link style={navStyle} to="/">
 					<li>24/7 Recipes</li>
-				</Link>
-				<Link style={navStyle} to="/testpage">
-					<li>Test Page</li>
 				</Link>
 				<Link style={navStyle} to="/user">
 					<li>My Pantry</li>

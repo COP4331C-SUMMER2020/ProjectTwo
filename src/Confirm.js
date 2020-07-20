@@ -1,6 +1,38 @@
 import React from "react";
 
 export default class Confirm extends React.Component {
+	constructor(props){
+		super(props)
+		
+		var id = 0;
+		var search = this.props.location.search;
+		var params = new URLSearchParams(search);
+		id = params.get('id');
+		
+		var jsonPayload = '{"userId" : "' + id + '"}';
+		console.log(jsonPayload);
+		
+		fetch('http://192.168.56.1:5000/api/confirm', {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: jsonPayload,
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Success:', data);
+			if (data.error == "") {
+			}
+			else {
+				document.getElementById("errorField").innerHTML = data.error;
+			}
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+			document.getElementById("errorField").innerHTML = error;
+		});
+	}
 	render() {
 		var id = 0;
 		var search = this.props.location.search;
@@ -8,8 +40,7 @@ export default class Confirm extends React.Component {
 		id = params.get('id');
 		return (
 			<div>
-				<h1>The Confirm Page</h1>
-				<p>User ID: { id }</p>
+				<h1 id="errorField">Your account is now confirmed!</h1>
 			</div>
 		);
 	}

@@ -13,6 +13,8 @@ import Confirm from "./Confirm";
 import Reset from "./Reset";
 import Login from "./Login";
 import Logout from "./Logout";
+import Recipe from "./Recipe";
+import ResetNotice from "./ResetNotice";
 
 import "./styles.css";
 
@@ -39,6 +41,8 @@ function Index() {
 					<Route path='/reset' exact component={Reset} />
 					<Route path='/login' exact component={Login} />
 					<Route path='/logout' exact component={Logout} />
+					<Route path='/recipe' exact component={Recipe} />
+					<Route path='/resetnotice' exact component={ResetNotice} />
 				</div>
 			</BrowserRouter>
 		</CookiesProvider>

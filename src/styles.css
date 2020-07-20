@@ -44,6 +44,17 @@ h4 {
 				 -0.5px -0.5px 0 #fff;
 }
 
+h5 {
+	font-weight: 300;
+	font-size: 3rem;
+	letter-spacing: 0.02em;
+	margin-bottom: 0;
+	text-shadow: -0.5px  0.5px 0 #fff,
+				  0.5px  0.5px 0 #fff,
+				  0.5px -0.5px 0 #fff,
+				 -0.5px -0.5px 0 #fff;
+}
+
 nav {
 	display: flex;
 	width: 100%;
@@ -63,25 +74,44 @@ li {
 	padding-top: 0em;
 }
 
+.resultsTable {
+	font-family: Ubuntu, Verdana, Geneva, sans-serif;
+	font-weight: 300;
+	font-size: 1rem;
+	letter-spacing: 0.02em;
+	background-color: white;
+	border: 2px solid;
+	border-color: #424242;
+	border-radius: 50px;
+	align-items: center;
+	position: center;
+	margin-left: 3em;
+}
+
 .errorReturn {
 	font-family: Ubuntu, Verdana, Geneva, sans-serif;
 	font-weight: 300;
 	font-size: 1rem;
 	letter-spacing: 0.02em;
 	color: red;
+	margin: 0 auto;
+	padding: 0;
 }
 
 .nav-links {
-	width: 60%;
+	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	padding-top: 0.5em;
+	padding-left: 0;
+	margin-left: 0;
 }
 
 .navClass {
 	background-image: url("main.png");
-	background-repeat: no-repeat;
-	background-size: 100vw;
+	background-repeat: repeat;
+	background-size: 1700px;
 }
 
 .container {
@@ -129,6 +159,15 @@ li {
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-color: 242424;
+}
+
+.resetButton {
+	color: #424242;
+	background-color: transparent;
+	font-family: Ubuntu, Verdana, Geneva, sans-serif;
+	font-size: 1rem;
+	margin: 0 auto;
+	padding: 0;
 }
 
 .registerButton {

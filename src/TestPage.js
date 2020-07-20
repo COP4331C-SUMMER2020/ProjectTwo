@@ -119,9 +119,30 @@ function RecipeSearch() {
 		
 		document.getElementById("recipename").innerHTML = "";
 		
-		var jsonPayload = '{"recipe" : "' + ingredient + '"}';
+		var jsonPayload = '{"Recipe" : "' + ingredient + '"}';
 		
-		document.getElementById("apireturn").innerHTML = jsonPayload;
+		fetch('http://192.168.56.1:5000/api/searchRecipe', {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: jsonPayload,
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Success:', data);
+			if (data.error == "") {
+				document.getElementById("apireturn").innerHTML = data;
+			}
+			else {
+				document.getElementById("apireturn").innerHTML = data.error;
+			}
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+			document.getElementById("apireturn").innerHTML = error;
+			return;
+		});
 	}
 	
 	return (

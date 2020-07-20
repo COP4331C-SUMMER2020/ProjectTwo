@@ -62,7 +62,7 @@ export default class RegisterScreen extends React.Component {
                 </View>
 
                 <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
-                    <Text style={{color: "#FFF", fontWeight: "500"}}>Sign up</Text>
+                    <Text style={{color: "#FFF", fontWeight: "500"}}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginHorizontal: 30,
-        backgroundColor: "#E9446A",
+        backgroundColor: "#4682b4",
         borderRadius: 4,
         height: 52,
         alignItems: "center",

@@ -75,6 +75,9 @@ export default class Home extends React.Component {
         return (
             <Container>
         <StatusBar barStyle="light-content"/>
+        <TouchableOpacity style={{marginTop: 1}} onPress={this.signOutUser}>
+                    <Text>Logout</Text>
+                </TouchableOpacity>
         <RecipeBackground source={require("../../assets/images/main.jpg")}>
           <SafeAreaView>
             <MainRecipe>
@@ -105,18 +108,7 @@ export default class Home extends React.Component {
             })}
           </Recipes>
         </RecipesContainer>
-      </Container>         
-      
-/*   
-<View style={styles.button}>
-                <Text>Hi {this.state.email}!</Text>
-
-                <TouchableOpacity style={{marginTop: 32}} onPress={this.signOutUser}>
-                    <Text>Logout</Text>
-                </TouchableOpacity>
-            </View>
-*/
-
+      </Container>      
         );
     }
 }

@@ -20,8 +20,9 @@ export default class LoginScreen extends React.Component {
 
     render() {
         return (
+            
             <View style={StyleSheet.container}>
-                <Text style={styles.greeting}>{`Hello again.\n Welcome back.`}</Text>
+                <Text style={styles.greeting}>{`Hello, welcome to\n 24/7 Recipes`}</Text>
                 <View style={styles.errorMessage}>
                     {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
                 </View>
@@ -53,7 +54,7 @@ export default class LoginScreen extends React.Component {
                 </TouchableOpacity>
                 <TouchableOpacity style={{alignSelf: "center", marginTop: 32}} onPress={() => this.props.navigation.navigate("Register")}>
                     <Text style={{color: "#414959", fontSize: 13}}>
-                        New to Recipes Finder? <Text style={{fontWeight: "500", color: "#E9446A"}}>Sign up</Text>
+                        New to Recipes Finder? <Text style={{fontWeight: "500", color: "#4682b4"}}>Sign up</Text>
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginHorizontal: 30,
-        backgroundColor: "#E9446A",
+        backgroundColor: "#4682b4",
         borderRadius: 4,
         height: 52,
         alignItems: "center",

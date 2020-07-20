@@ -44,7 +44,9 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "start npm run init-server && start npm run init-webapp",
+	"init-server": "node server.js",
+	"init-webapp": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

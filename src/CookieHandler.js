@@ -7,12 +7,12 @@ function CookieHandler() {
 	
 }
 
-export const setSessionCookie = (session: any): void => {
+export function setSessionCookie(session) {
 	Cookies.remove("session");
 	Cookies.set("session", session, { expires: 14 });
 };
 
-export const getSessionCookie: any = () => {
+export function getSessionCookie() {
 	const sessionCookie = Cookies.get("session");
 	
 	if (sessionCookie === undefined) {
@@ -22,7 +22,7 @@ export const getSessionCookie: any = () => {
 	}
 };
 
-export const removeSessionCookie = (): void => {
+export function removeSessionCookie() {
 	Cookies.remove("session");
 };
 

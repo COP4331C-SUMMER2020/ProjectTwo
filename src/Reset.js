@@ -39,7 +39,7 @@ export default class Reset extends React.Component {
 			})
 			.catch((error) => {
 				console.error('Error:', error);
-				document.getElementById("errorReturn").innerHTML = data.error;
+				document.getElementById("errorReturn").innerHTML = error;
 				return;
 			});
 		};

@@ -47,7 +47,7 @@ export default class Login extends React.Component {
 			})
 			.catch((error) => {
 				console.error('Error:', error);
-				document.getElementById("errorReturn").innerHTML = data.error;
+				document.getElementById("errorReturn").innerHTML = error;
 				return;
 			});
 			
@@ -89,7 +89,7 @@ export default class Login extends React.Component {
 			})
 			.catch((error) => {
 				console.error('Error:', error);
-				document.getElementById("errorReturn").innerHTML = data.error;
+				document.getElementById("errorReturn").innerHTML = error;
 				return;
 			});
 		};

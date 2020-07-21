@@ -2,36 +2,98 @@ export const categories = [
   {
     id: 3,
     name: 'Cookies',
-    
+    photo_url:
+    'https://www.telegraph.co.uk/content/dam/Travel/2019/January/france-food.jpg?imwidth=1400'
   },
   {
     id: 1,
     name: 'Mexican Food',
-    
+    photo_url: 'https://ak1.picdn.net/shutterstock/videos/19498861/thumb/1.jpg'
   },
   {
     id: 2,
     name: 'Italian Food',
-    
+    photo_url:
+      'https://images.unsplash.com/photo-1533777324565-a040eb52facd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
   },
   {
     id: 4,
     name: 'Smoothies',
-    
+    photo_url:
+    'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/still-life-of-three-fresh-smoothies-in-front-of-royalty-free-image-561093647-1544042068.jpg?crop=0.715xw:0.534xh;0.0945xw,0.451xh&resize=768:*'
   },
   {
     id: 0,
     name: 'Pizza',
-    
+    photo_url: 'https://amp.businessinsider.com/images/5c084bf7bde70f4ea53f0436-750-563.jpg'
   },
 ];
 
 export const recipes = [
   {
+    recipeId: 125,
+    categoryId: 3,
+    title: 'Boliche',
+    photo_url: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/File_by_Alexander_Baranov_-_IMG_9653_%2814137466752%29.jpg',
+    photosArray: [
+      'https://upload.wikimedia.org/wikipedia/commons/b/ba/File_by_Alexander_Baranov_-_IMG_9653_%2814137466752%29.jpg',
+      "https://namelymarly.com/wp-content/uploads/2018/04/20180415_Beet_Lasagna_10.jpg",
+      'https://advancelocal-adapter-image-uploads.s3.amazonaws.com/image.al.com/home/bama-media/width600/img/news_impact/photo/burger-fijpg-57e7e5907630c2ad.jpg',
+      'https://img.thedailybeast.com/image/upload/c_crop,d_placeholder_euli9k,h_1439,w_2560,x_0,y_0/dpr_1.5/c_limit,w_1044/fl_lossy,q_auto/v1492718105/articles/2013/09/24/burger-king-s-new-french-fries-took-ten-years-to-develop/130923-gross-burger-tease_izz59e',
+      'https://aht.seriouseats.com/images/2012/02/20120221-193971-fast-food-fries-Burger-King-fries-2.jpg'
+    ],
+    time: '20',
+    ingredients: [[25, '3lb'], [19, '2lb'], [30, '3tbs'], [15, '3tbs'], [29, '3g'], [52, '5g'], [21, '2lb'], [22, '7g'], [17, '1cup'], [4, '1/4cup'], [5, '1cup'], [23, '29oz']],
+    ingredients: ['3-5 lb Beef eye round roast.\n4 Goya Chorizos, quartered lengthwise\n3 tbs. capers\n3 Tbs. green Spanish olives w/pimentos\n1 large green bell pepper\n1 large onion\n1-2 heaping Tbs. oregano\n3 bay leaves\n6 cloves garlic\n2 packets Goya Sazon con Azafran\n2 large pinches saffron\n1 can tomato sauce (29 oz)\n1/4 cup olive oil\n2 Tbs.  Goya Adobo seasoning\n1 package Badia Cilantro\n1 cup red wine'],
+    description:
+      'Cut slits into eye round roast, and stuff with quartered chorizos (follow the grain of meat) lightly rub meat with adobo seasoning. Brown the meat on all sides in a sauté pan to seal in the juices. Remove and place in a large covered roasting pan. In the same pan, as the beef was browned, add saffron, garlic, onions, peppers, bay leaves, oregano, olives, capers, and the Sazon seasoning. Sauté until the onions are translucent in color, deglaze with red wine, turn heat down and simmer about five minutes. Add the cilantro and the tomato sauce and stir well and pour this mixture over the beef, and roast at 325 degrees for 1 1/2 hrs. - 2 hrs., or until meat is tender. Turn the roast over and baste with the sauce once in a while to assure full flavor penetration and even cooking. Serves 6-8.'
+  },
+  {
+    recipeId: 124,
+    categoryId: 3,
+    title: 'Azteca',
+    photo_url: 'https://i.redd.it/dwsv6bp4qmt41.jpg',
+    photosArray: [
+      'https://i.redd.it/dwsv6bp4qmt41.jpg',
+      "https://namelymarly.com/wp-content/uploads/2018/04/20180415_Beet_Lasagna_10.jpg",
+      'https://advancelocal-adapter-image-uploads.s3.amazonaws.com/image.al.com/home/bama-media/width600/img/news_impact/photo/burger-fijpg-57e7e5907630c2ad.jpg',
+      'https://img.thedailybeast.com/image/upload/c_crop,d_placeholder_euli9k,h_1439,w_2560,x_0,y_0/dpr_1.5/c_limit,w_1044/fl_lossy,q_auto/v1492718105/articles/2013/09/24/burger-king-s-new-french-fries-took-ten-years-to-develop/130923-gross-burger-tease_izz59e',
+      'https://aht.seriouseats.com/images/2012/02/20120221-193971-fast-food-fries-Burger-King-fries-2.jpg'
+    ],
+    time: '30',
+    ingredients: ['1 can (~2 cups) corn\n1 can (~2 cups) kidney beans\n1 can (~2 cups) black beans\n½ onion, finely minced\n4 cloves garlic, finely minced\n6 dried chilis (chili pequins), chopped\nmustard seed, salt, and freshly ground black pepper, to taste'],
+    description:
+      'Mix ingredients in pot; add three cans of water. Boil until done.'
+  },
+  {
+    recipeId: 123,
+    categoryId: 3,
+    title: 'Butter Dogs',
+    photo_url: 'https://i.redd.it/dwsv6bp4qmt41.jpg',
+    photosArray: [
+      'https://i.redd.it/dwsv6bp4qmt41.jpg',
+      "https://namelymarly.com/wp-content/uploads/2018/04/20180415_Beet_Lasagna_10.jpg",
+      'https://advancelocal-adapter-image-uploads.s3.amazonaws.com/image.al.com/home/bama-media/width600/img/news_impact/photo/burger-fijpg-57e7e5907630c2ad.jpg',
+      'https://img.thedailybeast.com/image/upload/c_crop,d_placeholder_euli9k,h_1439,w_2560,x_0,y_0/dpr_1.5/c_limit,w_1044/fl_lossy,q_auto/v1492718105/articles/2013/09/24/burger-king-s-new-french-fries-took-ten-years-to-develop/130923-gross-burger-tease_izz59e',
+      'https://aht.seriouseats.com/images/2012/02/20120221-193971-fast-food-fries-Burger-King-fries-2.jpg'
+    ],
+    time: '5',
+    ingredients: [[62, '15g'], [63, '10g']],
+    description:
+      'Place the sticks of butter into the hot dog buns and enjoy.'
+  },
+  {
     recipeId: 122,
     categoryId: 3,
     title: 'Oatmeal Cookies',
-    
+    photo_url: 'https://www.texanerin.com/content/uploads/2019/06/nobake-chocolate-cookies-1-650x975.jpg',
+    photosArray: [
+      'https://www.texanerin.com/content/uploads/2019/06/nobake-chocolate-cookies-1-650x975.jpg',
+      "https://namelymarly.com/wp-content/uploads/2018/04/20180415_Beet_Lasagna_10.jpg",
+      'https://advancelocal-adapter-image-uploads.s3.amazonaws.com/image.al.com/home/bama-media/width600/img/news_impact/photo/burger-fijpg-57e7e5907630c2ad.jpg',
+      'https://img.thedailybeast.com/image/upload/c_crop,d_placeholder_euli9k,h_1439,w_2560,x_0,y_0/dpr_1.5/c_limit,w_1044/fl_lossy,q_auto/v1492718105/articles/2013/09/24/burger-king-s-new-french-fries-took-ten-years-to-develop/130923-gross-burger-tease_izz59e',
+      'https://aht.seriouseats.com/images/2012/02/20120221-193971-fast-food-fries-Burger-King-fries-2.jpg'
+    ],
     time: '15',
     ingredients: [[0, '200ml'], [1, '5g'], [2, '300g']],
     description:
@@ -41,7 +103,14 @@ export const recipes = [
     recipeId: 3,
     categoryId: 4,
     title: 'Triple Berry Smoothie',
-    
+    photo_url:
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-how-to-make-a-smoothie-horizontal-1542310071.png?crop=0.803xw:0.923xh;0.116xw,0.00510xh&resize=768:*',
+    photosArray: [
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-how-to-make-a-smoothie-horizontal-1542310071.png?crop=0.803xw:0.923xh;0.116xw,0.00510xh&resize=768:*',
+      'https://www.vitamix.com/media/other/images/xVitamix-Triple-Berry-Smoothie-square-crop__1.jpg.pagespeed.ic.OgTC3ILD3R.jpg',
+      'http://images.media-allrecipes.com/userphotos/960x960/3798204.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrzui8MM6W66I29VZwVvcjpGv99JW3O1owgupc3KwB65rhAyrZ'
+    ],
     time: '10',
     ingredients: [
       [59, '1'],
@@ -54,7 +123,13 @@ export const recipes = [
     recipeId: 2,
     categoryId: 3,
     title: 'Vegan Cookies',
-    
+    photo_url: 'https://www.texanerin.com/content/uploads/2018/06/no-bake-lactation-cookies-1-650x975.jpg',
+    photosArray: [
+      'https://www.texanerin.com/content/uploads/2018/06/no-bake-lactation-cookies-1-650x975.jpg',
+      'https://ichef.bbci.co.uk/news/660/cpsprodpb/B2C0/production/_106106754_vegnuggets976.jpg',
+      'https://pixel.nymag.com/imgs/daily/grub/2017/11/22/22-mcds-chicken-tenders.w330.h330.jpg',
+      'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.health.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Flarge_16_9%2Fpublic%2Fstyles%2Fmain%2Fpublic%2Fgettyimages-508510211.jpg%3Fitok%3Dh-Uryi8r&w=400&c=sc&poi=face&q=85'
+    ],
     time: '30',
     ingredients: [
       [0, '2 quarts'],
@@ -75,7 +150,14 @@ export const recipes = [
     recipeId: 3,
     categoryId: 3,
     title: 'Pumpkin Spice Cookies',
-    
+    photo_url:
+      'https://www.texanerin.com/content/uploads/2018/11/pumpkin-spice-cookies-4-650x975.jpg',
+    photosArray: [
+      'https://www.texanerin.com/content/uploads/2018/11/pumpkin-spice-cookies-4-650x975.jpg',
+      'https://cdn.junglecreations.com/wp/junglecms/2018/07/4164c5bd-wide-thumbnail.jpg',
+      'https://pinchofyum.com/wp-content/uploads/Crunchwrap-Inside.jpg',
+      'https://monsonmadethis.com/wp-content/uploads/2017/10/IMG_20171015_161017_025-e1533869302263.jpg'
+    ],
     time: '45',
     ingredients: [
       [0, '2 tablespoons'],
@@ -99,7 +181,13 @@ export const recipes = [
     recipeId: 1,
     categoryId: 3,
     title: 'Brownies',
-    
+    photo_url: 'https://www.texanerin.com/content/uploads/2018/01/coconut-flour-brownies-1-650x975.jpg',
+    photosArray: [
+      'https://www.texanerin.com/content/uploads/2018/01/coconut-flour-brownies-1-650x975.jpg',
+      'https://images-gmi-pmc.edge-generalmills.com/6fbc6859-e2b1-499d-b0fa-ada600c9cc3f.jpg',
+      'http://www.recipe4living.com/assets/itemimages/400/400/3/83c29ac7418067c2e74f31c8abdd5a43_477607049.jpg',
+      'https://www.franchisechatter.com/wp-content/uploads/2014/08/KFC-Photo-by-James.jpg'
+    ],
     time: '30',
     ingredients: [
       [1, '2 tablespoons'],
@@ -126,6 +214,12 @@ export const recipes = [
     recipeId: 4,
     categoryId: 1,
     title: 'Perfect Fish Tacos',
+    photo_url: 'https://hips.hearstapps.com/hmg-prod/images/190307-fish-tacos-112-1553283299.jpg',
+    photosArray: [
+      'http://d2814mmsvlryp1.cloudfront.net/wp-content/uploads/2014/04/WGC-Fish-Tacos-copy-2.jpg',
+      'https://thecozyapron.com/wp-content/uploads/2018/03/baja-fish-tacos_thecozyapron_1.jpg',
+      'https://www.simplyrecipes.com/wp-content/uploads/2017/06/2017-07-22-FishTacos-6.jpg'
+    ],
     time: '35',
     ingredients: [
       [30, 'jucie of 1 '],
@@ -147,7 +241,13 @@ export const recipes = [
     recipeId: 5,
     categoryId: 1,
     title: 'Chicken Fajitas',
-    
+    photo_url:
+      'https://tmbidigitalassetsazure.blob.core.windows.net/secure/RMS/attachments/37/1200x1200/Flavorful-Chicken-Fajitas_EXPS_GHBZ18_12540_B08_15_8b.jpg',
+    photosArray: [
+      'https://dadwithapan.com/wp-content/uploads/2015/07/Spicy-Chicken-Fajitas-22-1200x480.jpg',
+      'https://3.bp.blogspot.com/-X-dHj7ORF9Q/XH4ssgTuSZI/AAAAAAAAEig/E46HP9wCfdsvyJFcMTX30cw-ICep8lF9ACHMYCw/s1600/chicken-fajitas-mexican-food-id-149559-buzzerg.jpg',
+      'https://cdn-image.foodandwine.com/sites/default/files/styles/medium_2x/public/201403-xl-chipotle-chicken-fajitas.jpg?itok=ghVcI5SQ'
+    ],
     time: 35,
     ingredients: [
       [9, '1/2 teaspoons'],
@@ -172,7 +272,13 @@ export const recipes = [
     recipeId: 6,
     categoryId: 2,
     title: 'Buffalo Pizza',
-    
+    photo_url:
+      'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+    photosArray: [
+      'https://www.tablefortwoblog.com/wp-content/uploads/2019/01/buffalo-chicken-pizza-recipe-photos-tablefortwoblog-3-500x500.jpg',
+      'http://pizzachoicema.com/wp-content/uploads/2018/08/Buffalo-Chicken-Pizza.jpg',
+      'https://static1.squarespace.com/static/565bb41ae4b0509ba9fdf769/t/5b9a8e80aa4a998b0be0fcf4/1536855690622/pizza.gif'
+    ],
     time: 50,
     ingredients: [
       [39, '1 lb'],
@@ -197,7 +303,13 @@ export const recipes = [
     recipeId: 0,
     categoryId: 0,
     title: 'Classic Lasagna',
-    
+    photo_url: 'https://namelymarly.com/wp-content/uploads/2018/04/20180415_Beet_Lasagna_10.jpg',
+    photosArray: [
+      "https://namelymarly.com/wp-content/uploads/2018/04/20180415_Beet_Lasagna_10.jpg",
+      'https://advancelocal-adapter-image-uploads.s3.amazonaws.com/image.al.com/home/bama-media/width600/img/news_impact/photo/burger-fijpg-57e7e5907630c2ad.jpg',
+      'https://img.thedailybeast.com/image/upload/c_crop,d_placeholder_euli9k,h_1439,w_2560,x_0,y_0/dpr_1.5/c_limit,w_1044/fl_lossy,q_auto/v1492718105/articles/2013/09/24/burger-king-s-new-french-fries-took-ten-years-to-develop/130923-gross-burger-tease_izz59e',
+      'https://aht.seriouseats.com/images/2012/02/20120221-193971-fast-food-fries-Burger-King-fries-2.jpg'
+    ],
     time: '15',
     ingredients: [[0, '200ml'], [1, '5g'], [2, '300g']],
     description:
@@ -207,7 +319,12 @@ export const recipes = [
     recipeId: 7,
     categoryId: 2,
     title: 'Spaghetti Carbonara',
-    
+    photo_url: 'https://truffle-assets.imgix.net/655ce202-862-butternutsquashcarbonara-land.jpg',
+    photosArray: [
+      'https://ak3.picdn.net/shutterstock/videos/10431533/thumb/10.jpg',
+      'https://www.kcet.org/sites/kl/files/styles/kl_image_large/public/thumbnails/image/square_hero_desktop_2x_sfs_spaghetti_carbonara_clr-3.jpg?itok=T-rsBDIZ',
+      'https://cdn-image.foodandwine.com/sites/default/files/HD-201104-r-spaghetti-with-anchovy.jpg'
+    ],
     time: 15,
     ingredients: [
       [48, '50g'],
@@ -226,7 +343,12 @@ export const recipes = [
     recipeId: 8,
     categoryId: 2,
     title: 'Lazania',
-    
+    photo_url: 'https://images8.alphacoders.com/817/817353.jpg',
+    photosArray: [
+      'https://previews.123rf.com/images/somegirl/somegirl1509/somegirl150900048/46103208-top-view-of-a-delicious-traditional-italian-lasagna-made-with-minced-beef-bolognese-sauce-topped-wit.jpg',
+      'https://truffle-assets.imgix.net/87f324e4-YOUTUBE-NO-TXT.00_03_19_14.Imagen_fija001.jpg',
+      'https://images4.alphacoders.com/817/817350.jpg'
+    ],
     time: 60,
     ingredients: [
       [36, '1 large'],
@@ -607,4 +729,17 @@ export const ingredients = [
     photo_url:
       'http://images.media-allrecipes.com/userphotos/960x960/3758635.jpg'
   },
+  {
+    ingredientId: 62,
+    name: 'Butter',
+    photo_url:
+      'https://sherylshenefelt.com/wp-content/uploads/2013/02/butter.jpg'
+  },
+  {
+    ingredientId: 64,
+    name: 'Bread',
+    photo_url:
+      'https://sherylshenefelt.com/wp-content/uploads/2013/02/butter.jpg'
+  },
+  
 ];

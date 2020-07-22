@@ -41,6 +41,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname + '/src'));
 
  const uri = process.env.ATLAS_URI;
  const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -49,6 +50,10 @@ app.use(express.json());
  app.get('/api', (req, res) => {
 	res.send({code: 200, message: 'Eyyy it worked'}) 
  })
+ 
+ app.get('/', function(req, res) {
+	res.render('index'); 
+ });
 
 
  app.post('/api/login', async (req, res, next) => 
